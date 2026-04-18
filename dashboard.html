@@ -26,7 +26,6 @@
   --gn: #1f7a45;
   --gn-bg: #ecf5ef;
   --gn-b: #a8d4ba;
-  --pbi-gray: #f3f2f1;
   --lsb-w: 236px;
   --rsb-w: 292px;
   --top-h: 64px;
@@ -181,7 +180,10 @@ html, body {
   overflow: hidden; min-width: 0;
   background: #fff;
   position: relative;
+  padding-bottom: 8px; /* small breathing room so the strip doesn't clip Power BI's zoom row */
+  transition: padding-bottom .28s cubic-bezier(.2, .8, .2, 1);
 }
+#main.shifted { padding-bottom: 254px; } /* 8px base + 246px additional for expanded panel */
 #embed-wrap {
   flex: 1; position: relative; overflow: hidden;
   background: #fff;
@@ -195,14 +197,6 @@ html, body {
   background: #fff;
 }
 #dash.on { opacity: 1; }
-
-#bot-mask {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 40px;
-  background: var(--pbi-gray);
-  border-top: 1px solid #e6e4e2;
-  z-index: 3; pointer-events: none;
-}
 
 #skel {
   position: absolute; inset: 0; z-index: 8;
@@ -226,82 +220,134 @@ html, body {
 .sk-b { flex: 1; border-radius: 2px 2px 0 0; }
 .sk-tbl { grid-column: 1/-1; background: #fafafa; border: 1px solid #f0f0f0; border-radius: 6px; padding: 13px; display: flex; flex-direction: column; gap: 6px; }
 
-/* RIGHT SIDEBAR */
+/* BOTTOM PANEL — TradingView-style strip + expandable info panel */
 #rsb {
-  width: var(--rsb-w);
+  position: absolute; bottom: 0; left: 0; right: 0;
   background: var(--bg);
-  border-left: 1px solid var(--bd);
+  border-top: 1px solid var(--bd);
+  z-index: 10;
+  height: 44px; /* collapsed: just the strip */
+  transition: height .28s cubic-bezier(.2, .8, .2, 1);
   display: flex; flex-direction: column;
-  flex-shrink: 0;
-  transition: width .22s ease;
   overflow: hidden;
 }
-#rsb.col { width: 44px; }
+#rsb.open { height: 290px; }
+
 #rsb-head {
-  height: 40px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 8px 0 14px;
-  border-bottom: 1px solid var(--bd);
-  flex-shrink: 0;
+  height: 44px; flex-shrink: 0;
+  display: flex; align-items: center;
+  padding: 0 12px 0 16px; gap: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background .12s, border-color .2s;
+  user-select: none;
+  background: var(--bg-s);
 }
+#rsb-head:hover { background: var(--bg-h); }
+#rsb.open #rsb-head { border-bottom-color: var(--bd); background: var(--bg); }
+
+.rsb-help-icon {
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--red-s);
+  border: 1px solid var(--red-b);
+  color: var(--red);
+  flex-shrink: 0;
+  transition: background .15s, transform .15s;
+}
+#rsb-head:hover .rsb-help-icon {
+  background: var(--red);
+  color: #fff;
+  transform: scale(1.05);
+}
+
 .rsb-head-label {
   font-size: 10.5px; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase;
   color: var(--ink3);
-  white-space: nowrap;
-  transition: opacity .15s, width .2s;
-  overflow: hidden;
+  flex-shrink: 0;
 }
-#rsb.col .rsb-head-label { opacity: 0; width: 0; }
-#rsb.col #rsb-head { padding: 0; justify-content: center; }
-#rsb-toggle svg { transition: transform .24s; }
-#rsb.col #rsb-toggle svg { transform: rotate(180deg); }
+.rsb-head-sep { color: var(--ink5); font-size: 11px; flex-shrink: 0; }
+.rsb-head-current {
+  font-size: 13px; font-weight: 600; color: var(--ink);
+  flex: 1; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+#rsb-cta {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 30px; padding: 0 13px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--f); font-size: 12.5px; font-weight: 500;
+  cursor: pointer;
+  transition: background .12s, box-shadow .15s, transform .12s;
+  box-shadow: 0 1px 2px rgba(215,32,39,.18);
+}
+#rsb-cta:hover {
+  background: var(--red-d);
+  box-shadow: 0 4px 12px rgba(215,32,39,.32);
+  transform: translateY(-1px);
+}
+#rsb-cta-chev { transition: transform .28s cubic-bezier(.2, .8, .2, 1); }
+#rsb.open #rsb-cta-chev { transform: rotate(180deg); }
 
 #rsb-body {
   flex: 1; overflow-y: auto; overflow-x: hidden;
-  padding: 20px 18px;
-  transition: opacity .15s;
+  padding: 22px 24px;
   scrollbar-width: thin; scrollbar-color: var(--bd) transparent;
+  display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 32px;
+  opacity: 0; transition: opacity .2s ease .08s;
 }
-#rsb-body::-webkit-scrollbar { width: 3px; }
-#rsb-body::-webkit-scrollbar-thumb { background: var(--bd); border-radius: 3px; }
-#rsb.col #rsb-body { opacity: 0; pointer-events: none; }
-.rsb-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
+#rsb-body::-webkit-scrollbar { width: 4px; }
+#rsb-body::-webkit-scrollbar-thumb { background: var(--bd-m); border-radius: 3px; }
+#rsb.open #rsb-body { opacity: 1; }
+.rsb-col { min-width: 0; }
+
+.rsb-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
 .rsb-tag {
   display: inline-flex; align-items: center;
   font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
   color: var(--red-d); background: var(--red-s);
   border: 1px solid var(--red-b);
   border-radius: 4px; padding: 3px 8px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
-.rsb-desc { font-size: 13px; color: var(--ink2); line-height: 1.7; margin-bottom: 20px; }
-.rsb-divider { height: 1px; background: var(--bd); margin: 18px 0; }
+.rsb-desc { font-size: 13px; color: var(--ink2); line-height: 1.65; }
 .rsb-section-label {
   font-size: 10.5px; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase;
   color: var(--ink3); margin-bottom: 10px;
 }
-.rsb-defs { display: flex; flex-direction: column; gap: 14px; }
+.rsb-defs { display: flex; flex-direction: column; gap: 12px; }
 .rsb-def-term { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
-.rsb-def-body { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+.rsb-def-body { font-size: 12px; color: var(--ink3); line-height: 1.55; }
 .rsb-tip {
   background: var(--red-s); border: 1px solid var(--red-b);
-  border-radius: 8px; padding: 14px;
-  margin-top: 18px;
+  border-radius: 8px; padding: 12px 14px;
+  margin-bottom: 14px;
 }
 .rsb-tip-label {
   font-size: 10px; font-weight: 600;
   letter-spacing: .08em; text-transform: uppercase;
   color: var(--red-d); margin-bottom: 6px;
 }
-.rsb-tip-text { font-size: 12.5px; color: var(--ink2); line-height: 1.65; }
+.rsb-tip-text { font-size: 12.5px; color: var(--ink2); line-height: 1.55; }
 .rsb-disclaimer {
-  margin-top: 22px; padding-top: 18px;
-  border-top: 1px solid var(--bd);
   font-size: 10.5px; color: var(--ink4); line-height: 1.55;
 }
 .rsb-disclaimer strong { color: var(--ink3); font-weight: 600; }
+
+/* Stack to single column on narrow screens */
+@media (max-width: 900px) {
+  #rsb-body { grid-template-columns: 1fr; gap: 18px; }
+  #rsb-cta-text { display: none; }
+  #rsb-cta { padding: 0 10px; }
+}
 </style>
 </head>
 <body>
@@ -551,38 +597,47 @@ html, body {
           title="RankMyHotel Dashboard"
           allowfullscreen allow="fullscreen; clipboard-write; encrypted-media">
         </iframe>
-
-        <div id="bot-mask"></div>
       </div>
-    </div>
 
-    <!-- RIGHT SIDEBAR -->
-    <div id="rsb">
-      <div id="rsb-head">
-        <span class="rsb-head-label">About this report</span>
-        <button class="icon-btn" id="rsb-toggle" onclick="toggleRsb()" aria-label="Toggle info panel">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><polyline points="5.5,3 9.5,7.5 5.5,12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-        </button>
-      </div>
-      <div id="rsb-body">
-        <div class="rsb-title" id="rsb-title">Ranking Revenue</div>
-        <div class="rsb-tag" id="rsb-tag">Rankings</div>
-        <p class="rsb-desc" id="rsb-desc">Ranked list of every hotel in the selected market by total room revenue.</p>
-        <div class="rsb-divider"></div>
-        <div class="rsb-section-label">Key definitions</div>
-        <div class="rsb-defs" id="rsb-defs">
-          <div><div class="rsb-def-term">Rank</div><div class="rsb-def-body">Position by total room revenue among filtered hotels.</div></div>
-          <div><div class="rsb-def-term">YoY%</div><div class="rsb-def-body">Year-over-year change in revenue vs. the same month 12 months ago.</div></div>
+        <!-- BOTTOM PANEL — TradingView-style strip + expandable info -->
+        <div id="rsb">
+          <div id="rsb-head" onclick="toggleRsb()">
+            <span class="rsb-help-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M6.2 6.2c0-1 .8-1.7 1.8-1.7s1.8.7 1.8 1.6c0 .8-.5 1.2-1.1 1.6-.5.3-.7.6-.7 1.2" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".85" fill="currentColor"/></svg>
+            </span>
+            <span class="rsb-head-label">About</span>
+            <span class="rsb-head-sep">·</span>
+            <span class="rsb-head-current" id="rsb-head-title">Ranking Revenue</span>
+            <button id="rsb-cta" onclick="event.stopPropagation(); toggleRsb();" type="button">
+              <span id="rsb-cta-text">Learn about this report</span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" id="rsb-cta-chev"><polyline points="3,8 6,5 9,8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            </button>
+          </div>
+          <div id="rsb-body">
+            <div class="rsb-col">
+              <div class="rsb-title" id="rsb-title">Ranking Revenue</div>
+              <div class="rsb-tag" id="rsb-tag">Rankings</div>
+              <p class="rsb-desc" id="rsb-desc">Ranked list of every hotel in the selected market by total room revenue.</p>
+            </div>
+            <div class="rsb-col">
+              <div class="rsb-section-label">Key definitions</div>
+              <div class="rsb-defs" id="rsb-defs">
+                <div><div class="rsb-def-term">Rank</div><div class="rsb-def-body">Position by total room revenue among filtered hotels.</div></div>
+                <div><div class="rsb-def-term">YoY%</div><div class="rsb-def-body">Year-over-year change in revenue vs. the same month 12 months ago.</div></div>
+              </div>
+            </div>
+            <div class="rsb-col">
+              <div class="rsb-tip" id="rsb-tip">
+                <div class="rsb-tip-label">How to use this</div>
+                <div class="rsb-tip-text">The momentum arrow shows whether a hotel is climbing or falling in rank.</div>
+              </div>
+              <div class="rsb-disclaimer">
+                <strong>Data source:</strong> Texas State Comptroller Hotel Occupancy Tax Receipts. RANKMYHOTEL.NET assumes no responsibility or liability for any errors or omissions. Information is provided "as is" with no guarantees of completeness, accuracy, or timeliness. Use of this site is solely at your own risk.
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="rsb-tip" id="rsb-tip">
-          <div class="rsb-tip-label">How to use this</div>
-          <div class="rsb-tip-text">The momentum arrow shows whether a hotel is climbing or falling in rank.</div>
-        </div>
-        <div class="rsb-disclaimer">
-          <strong>Data source:</strong> Texas State Comptroller Hotel Occupancy Tax Receipts.
-          <br><br>
-          RANKMYHOTEL.NET assumes no responsibility or liability for any errors or omissions in the content of this site. The information contained in this site is provided on an "as is" basis with no guarantees of completeness, accuracy, usefulness or timeliness. Your use of this site and its contents is solely at your own risk.
-        </div>
+
       </div>
     </div>
   </div>
@@ -597,6 +652,7 @@ html, body {
 
   function updateRsb(el) {
     document.getElementById('rsb-title').textContent = el.dataset.title;
+    document.getElementById('rsb-head-title').textContent = el.dataset.title;
     document.getElementById('rsb-tag').textContent = el.dataset.section;
     document.getElementById('rsb-desc').textContent = el.dataset.desc;
     document.getElementById('rsb-tip').querySelector('.rsb-tip-text').textContent = el.dataset.tip;
@@ -621,7 +677,14 @@ html, body {
     });
   });
 
-  function toggleRsb() { document.getElementById('rsb').classList.toggle('col'); }
+  function toggleRsb() {
+    const rsb = document.getElementById('rsb');
+    const main = document.getElementById('main');
+    const ctaText = document.getElementById('rsb-cta-text');
+    const isOpen = rsb.classList.toggle('open');
+    main.classList.toggle('shifted', isOpen);
+    ctaText.textContent = isOpen ? 'Hide details' : 'Learn about this report';
+  }
   function toggleLsb() { document.getElementById('lsb').classList.toggle('col'); }
 </script>
 </body>
