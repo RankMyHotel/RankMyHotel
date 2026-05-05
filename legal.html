@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Privacy Policy, Terms of Service, and Contact for RankMyHotel.net.">
+<meta name="theme-color" content="#d72027">
+<meta name="robots" content="noindex">
+<!-- noindex: legal pages add no SEO value and can dilute brand SEO. -->
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23d72027'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='20' font-weight='900' fill='white' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+
+<title>Legal — RankMyHotel.net</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   LEGAL PAGE — Privacy + Terms + Contact, all stacked on one page.
+   Linked from index.html footer and dashboard.html side panel.
+   Self-contained: no Memberstack, no analytics dependencies, no auth state.
+   This page works the same whether the user is logged in or out.
+   ============================================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --red: #d72027;
+  --red-d: #b31a20;
+  --red-s: #fdecec;
+  --red-b: #f5c1c3;
+  --ink: #0a0a0a;
+  --ink2: #3d3d3d;
+  --ink3: #6b6b6b;
+  --ink4: #a1a1a1;
+  --ink5: #d4d4d4;
+  --bg: #ffffff;
+  --bg-s: #fafaf9;
+  --bg-m: #f4f3f1;
+  --bd: #ebeae8;
+  --bd-m: #d8d7d4;
+  --f: 'Inter', sans-serif;
+  --fd: 'Oswald', sans-serif;
+  --fm: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f); font-size: 15px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--red); text-decoration: none; }
+a:hover { color: var(--red-d); text-decoration: underline; }
+
+/* Minimal top bar — just logo + back button, no auth controls.
+   Matches the homepage's brand styling so it doesn't feel like
+   a different site. */
+.topbar {
+  height: 64px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--bd);
+  display: flex; align-items: center;
+  padding: 0 32px;
+  position: sticky; top: 0; z-index: 100;
+}
+.brand {
+  font-family: var(--fd);
+  font-size: 18px; font-weight: 700; letter-spacing: .02em;
+  color: var(--ink); text-decoration: none;
+  flex: 1;
+}
+.brand .dot { color: var(--red); font-weight: 700; }
+.brand .tld { color: var(--ink3); font-weight: 500; }
+.brand:hover { text-decoration: none; color: var(--ink); }
+.back-btn {
+  font-size: 13.5px; font-weight: 500;
+  color: var(--ink3); cursor: pointer;
+  background: none; border: 1px solid var(--bd-m); border-radius: 7px;
+  padding: 8px 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: all .15s;
+  font-family: var(--f);
+}
+.back-btn:hover { color: var(--red); border-color: var(--red-b); background: var(--red-s); }
+
+/* Page layout */
+.wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
+.page-eyebrow {
+  font-family: var(--fm);
+  font-size: 11px; color: var(--red); text-transform: uppercase; letter-spacing: .12em;
+  margin-bottom: 12px;
+}
+.page-title {
+  font-family: var(--fd);
+  font-size: 36px; font-weight: 700; letter-spacing: -.01em;
+  color: var(--ink); margin-bottom: 8px;
+}
+.page-sub { font-size: 14px; color: var(--ink3); margin-bottom: 20px; }
+
+/* Mini table of contents */
+.toc {
+  display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
+  padding: 14px 18px; margin-bottom: 40px;
+  background: var(--bg-s); border: 1px solid var(--bd); border-radius: 10px;
+  font-size: 13px;
+}
+.toc strong { color: var(--ink3); font-weight: 600; }
+.toc a { color: var(--ink2); font-weight: 500; }
+.toc a:hover { color: var(--red); text-decoration: none; }
+
+/* Sections — anchor targets for #privacy / #terms / #contact */
+section.legal-section {
+  padding: 32px 0;
+  border-top: 1px solid var(--bd);
+  scroll-margin-top: 80px;
+}
+section.legal-section:first-of-type { border-top: none; padding-top: 0; }
+section h2 {
+  font-family: var(--fd);
+  font-size: 24px; font-weight: 700; letter-spacing: -.005em;
+  color: var(--ink); margin-bottom: 6px;
+}
+section .updated {
+  font-size: 12px; color: var(--ink4); margin-bottom: 20px;
+}
+section h3 {
+  font-size: 15px; font-weight: 600; color: var(--ink);
+  margin-top: 22px; margin-bottom: 8px;
+}
+section p { margin-bottom: 14px; color: var(--ink2); }
+section ul { margin: 8px 0 16px 22px; }
+section ul li { margin-bottom: 6px; color: var(--ink2); }
+section strong { color: var(--ink); font-weight: 600; }
+
+/* Contact section gets a subtle highlight card around the email */
+.contact-card {
+  background: var(--red-s); border: 1px solid var(--red-b);
+  border-radius: 10px; padding: 18px 20px;
+  margin: 18px 0;
+}
+.contact-card .label {
+  font-size: 11px; font-weight: 600; color: var(--red-d);
+  text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px;
+}
+.contact-card .email {
+  font-family: var(--fm); font-size: 15px; font-weight: 500;
+  color: var(--ink);
+}
+.contact-card .response {
+  font-size: 13px; color: var(--ink3); margin-top: 6px;
+}
+
+/* Bottom footer — just copyright. No legal links here (we ARE the legal page). */
+.foot {
+  background: var(--bg-s);
+  border-top: 1px solid var(--bd);
+  padding: 24px 32px;
+  font-size: 12px; color: var(--ink4);
+  text-align: center;
+}
+.foot a { color: var(--ink4); }
+.foot a:hover { color: var(--red); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .topbar { padding: 0 18px; }
+  .wrap { padding: 32px 18px 60px; }
+  .page-title { font-size: 28px; }
+  .toc { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">RANKMYHOTEL<span class="dot">.</span><span class="tld">NET</span></a>
+  <!-- Smart back button: tries history.back() (so a logged-in member from
+       /dashboard.html lands back there, a homepage visitor lands back on /),
+       falls back to / if there's no history (e.g., direct link or bookmark). -->
+  <button class="back-btn" onclick="goBack()" aria-label="Back to previous page">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M9 3 L4 7 L9 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    Back
+  </button>
+</header>
+
+<div class="wrap">
+
+  <div class="page-eyebrow">/ legal</div>
+  <h1 class="page-title">Legal information</h1>
+  <p class="page-sub">Privacy Policy, Terms of Service, and how to contact us.</p>
+
+  <nav class="toc" aria-label="On this page">
+    <strong>On this page:</strong>
+    <a href="#privacy">Privacy</a>
+    <a href="#terms">Terms</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- ============ PRIVACY ============ -->
+  <section class="legal-section" id="privacy">
+    <h2>Privacy Policy</h2>
+    <div class="updated">Last updated: May 2026</div>
+
+    <p>This Privacy Policy explains how RankMyHotel.net ("we," "us") collects, uses, and shares information when you use our service.</p>
+
+    <h3>Information we collect</h3>
+    <ul>
+      <li><strong>Account information:</strong> Email address and password. Passwords are hashed by Memberstack and not visible to us.</li>
+      <li><strong>Payment information:</strong> Card details and billing address are collected and stored by Stripe, our payment processor. We do not store full card numbers; we only retain a Stripe customer reference.</li>
+      <li><strong>Usage data:</strong> We use Google Analytics to collect anonymized information about how visitors use the site, including pages viewed, session duration, browser type, and approximate geographic location (city level).</li>
+      <li><strong>Authentication data:</strong> Memberstack manages your login session and stores a session token in your browser's local storage.</li>
+    </ul>
+
+    <h3>How we use your information</h3>
+    <ul>
+      <li>To provide and maintain the service</li>
+      <li>To process payments and send receipts</li>
+      <li>To communicate with you about your account, billing, and material changes to the service</li>
+      <li>To understand how the service is used so we can improve it</li>
+      <li>To respond to your support requests</li>
+    </ul>
+
+    <h3>How we share your information</h3>
+    <p>We do not sell your personal information. We share information only with the following service providers, who handle data on our behalf:</p>
+    <ul>
+      <li><strong>Stripe</strong> — payment processing and subscription management</li>
+      <li><strong>Memberstack</strong> — account authentication and member management</li>
+      <li><strong>Google Analytics</strong> — anonymized usage analytics</li>
+      <li><strong>Microsoft Power BI</strong> — dashboard hosting</li>
+    </ul>
+    <p>Each of these providers has its own privacy policy. We may also disclose information when required by law or to protect our rights.</p>
+
+    <h3>Cookies and tracking</h3>
+    <p>The service uses browser local storage to maintain your authenticated session. Google Analytics may set cookies to track aggregated, anonymized usage. You can disable cookies in your browser settings, though this may affect site functionality.</p>
+
+    <h3>Your rights</h3>
+    <p>Depending on your jurisdiction, you may have rights to access, correct, delete, or export your personal information. To exercise these rights, use the contact details in the Contact section below.</p>
+    <p><strong>California residents (CCPA):</strong> You have the right to know what personal information we collect, request deletion, and opt out of any sale of personal information. We do not sell personal information.</p>
+    <p><strong>EU/UK residents (GDPR):</strong> You have additional rights including the right to data portability and the right to lodge a complaint with a supervisory authority.</p>
+
+    <h3>Data retention</h3>
+    <p>We retain account information for as long as your account is active and for a reasonable period thereafter to comply with legal and accounting obligations. You may request deletion of your account at any time.</p>
+
+    <h3>Data security</h3>
+    <p>We use industry-standard security measures, including encryption in transit (TLS/SSL) and reputable third-party providers (Stripe is PCI-DSS certified; Memberstack uses bank-level encryption). However, no system is completely secure, and we cannot guarantee absolute security.</p>
+
+    <h3>Children's privacy</h3>
+    <p>The service is not directed to children under 13, and we do not knowingly collect information from them. If you believe a child has provided us information, contact us so we can delete it.</p>
+
+    <h3>Changes to this Policy</h3>
+    <p>We may update this Privacy Policy from time to time. The "Last updated" date at the top of this section indicates when it was last revised. Material changes will be communicated to active subscribers via email.</p>
+  </section>
+
+  <!-- ============ TERMS OF SERVICE ============ -->
+  <section class="legal-section" id="terms">
+    <h2>Terms of Service</h2>
+    <div class="updated">Last updated: May 2026</div>
+
+    <p>By accessing or using RankMyHotel.net (the "Service"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.</p>
+
+    <h3>What we provide</h3>
+    <p>RankMyHotel.net aggregates and visualizes hotel revenue and occupancy data sourced from public filings made available by the Texas State Comptroller of Public Accounts. We do not collect, generate, or independently verify the underlying data.</p>
+
+    <h3>Subscription and billing</h3>
+    <p>Access to the dashboards is provided on a recurring monthly subscription basis. The current price is displayed on our pricing page. New members may receive a free trial period as offered at signup. Your subscription will automatically renew at the end of each billing period at the then-current rate unless you cancel. Payment is processed by Stripe.</p>
+
+    <h3>Cancellation</h3>
+    <p>You may cancel your subscription at any time through the "Manage Subscription" link in your account or through Stripe's customer portal. Cancellation takes effect at the end of your current billing period; you will retain access until that date. We do not offer prorated refunds for partial billing periods.</p>
+
+    <h3>Refunds</h3>
+    <p>If you are not satisfied with the service, contact us within 7 days of your initial paid charge and we will issue a full refund at our discretion. After the first 7 days, refunds are issued on a case-by-case basis. Free trial cancellations result in no charge.</p>
+
+    <h3>No warranty</h3>
+    <p>All content is provided "as is" and "as available," without warranties of any kind, express or implied, including warranties of accuracy, completeness, timeliness, merchantability, or fitness for a particular purpose. We assume no responsibility or liability for any errors, omissions, or delays in the content or its delivery.</p>
+
+    <h3>Not professional advice</h3>
+    <p>Information on this site is for informational purposes only and does not constitute financial, investment, legal, accounting, tax, appraisal, or business advice. You should not rely on data from this site as the sole basis for any business, financial, or investment decision. Consult qualified professionals for advice tailored to your situation.</p>
+
+    <h3>Account security and acceptable use</h3>
+    <p>You are responsible for the confidentiality of your account credentials. You agree not to:</p>
+    <ul>
+      <li>Share your account credentials or allow multiple individuals to use a single subscription</li>
+      <li>Scrape, copy, redistribute, or resell data accessed through the service</li>
+      <li>Reverse-engineer, decompile, or otherwise attempt to extract source code</li>
+      <li>Use the service in any manner that could damage, disable, or impair its operation</li>
+      <li>Use the service for any unlawful purpose</li>
+    </ul>
+
+    <h3>Termination</h3>
+    <p>We reserve the right to suspend or terminate your access to the service at any time, with or without notice, for violation of these Terms or at our sole discretion. Upon termination, your subscription will be cancelled and you will lose access to the dashboards.</p>
+
+    <h3>Intellectual property</h3>
+    <p>The service, including its design, organization, and presentation, is the property of RankMyHotel.net and is protected by copyright and other intellectual property laws. Underlying hotel performance data is sourced from public filings of the Texas State Comptroller and is not subject to our copyright.</p>
+
+    <h3>Third-party services</h3>
+    <p>The service uses third-party providers including Microsoft Power BI (dashboard hosting), Stripe (payment processing), Memberstack (authentication), and Google Analytics. We do not control these services and are not responsible for their availability, accuracy, or content. RankMyHotel.net is not affiliated with, endorsed by, or sponsored by the Texas State Comptroller's office or the State of Texas.</p>
+
+    <h3>Limitation of liability</h3>
+    <p>To the maximum extent permitted by law, RankMyHotel.net shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, arising from your use of the service. Our total liability for any claim shall not exceed the fees paid by you to us in the twelve (12) months preceding the claim.</p>
+
+    <h3>Changes to the Service or Terms</h3>
+    <p>We reserve the right to modify the service, our pricing, or these Terms at any time. Material changes will be communicated via email to active subscribers. Continued use of the service after changes constitutes acceptance of the modified Terms.</p>
+
+    <h3>Governing law</h3>
+    <p>These Terms are governed by the laws of the State of Texas, without regard to conflict-of-law principles. Any disputes shall be resolved in the state or federal courts located in Texas.</p>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="legal-section" id="contact">
+    <h2>Contact</h2>
+    <div class="updated">Response time: within 72 hours</div>
+
+    <p>Questions about your subscription, account, the data, refunds, or anything else? Get in touch using the email below. We read every message and aim to respond within 72 hours during business days.</p>
+
+    <!-- TODO: replace placeholder email with real support address once configured.
+         When updating, also remove "(placeholder)" hint text below. -->
+    <div class="contact-card">
+      <div class="label">Email us</div>
+      <div class="email">support@example.com <span style="color:var(--ink4); font-weight: 400; font-size: 12px;">(placeholder — coming soon)</span></div>
+      <div class="response">We typically respond within 72 hours, Monday–Friday.</div>
+    </div>
+
+    <h3>For account or billing questions</h3>
+    <p>The fastest way to manage your subscription is through the "Manage Subscription" button on your dashboard, which opens Stripe's customer portal. There you can update your payment method, download invoices, or cancel your plan immediately. For anything Stripe doesn't cover, email us at the address above.</p>
+
+    <h3>For data questions</h3>
+    <p>Questions about how a specific number was calculated, what data is included, or where to find a particular hotel? Email us. Note: we cannot modify or correct the underlying source data, which comes from the Texas State Comptroller's public filings.</p>
+
+    <h3>For press, partnerships, and consulting inquiries</h3>
+    <p>Use the email above. We're happy to discuss data partnerships, white-label opportunities, or one-off consulting engagements with hotel owners and investors needing more bespoke analysis than the dashboards provide.</p>
+  </section>
+
+</div>
+
+<footer class="foot">
+  © 2026 RankMyHotel.net · <a href="index.html">Home</a>
+</footer>
+
+<script>
+  // Smart back button: prefer browser history (so users return to the
+  // homepage / dashboard / wherever they came from), fall back to /
+  // if there's no usable history. document.referrer being on the same
+  // origin is our heuristic — direct visits and bookmarks have empty
+  // or external referrers, in which case we just go home.
+  function goBack() {
+    var sameOriginReferrer = document.referrer && document.referrer.indexOf(window.location.origin) === 0;
+    if (sameOriginReferrer && window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = 'index.html';
+    }
+  }
+</script>
+
+</body>
+</html>
