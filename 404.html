@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="The page you were looking for could not be found. Return to RankMyHotel.net.">
+<meta name="theme-color" content="#d72027">
+<!-- Error page — keep it out of search results. -->
+<meta name="robots" content="noindex">
+
+<!-- Favicons — physical files served from the site root. -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" sizes="any" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<title>Page not found — RankMyHotel.net</title>
+
+<!-- ============================================================================
+     404 PAGE
+     ----------------------------------------------------------------------------
+     This is a real, branded 404 — it does NOT auto-redirect. An instant
+     redirect of every unknown URL to the homepage produces "soft 404s" in
+     Google Search Console (Google sees a 200 + redirect instead of a genuine
+     404). Returning a proper 404 status with this page, and letting the
+     visitor choose where to go, is the correct behaviour.
+
+     HOSTING NOTE: make sure your host serves this file with an actual HTTP
+     404 status for unknown paths (most static hosts do this automatically
+     for a file named 404.html; confirm in your host's settings).
+
+     Self-contained: no Memberstack, no analytics, no auth state — it works
+     the same whether or not the visitor is logged in.
+     ============================================================================ -->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --red: #d72027;
+  --red-d: #b31a20;
+  --red-s: #fdecec;
+  --red-b: #f5c1c3;
+  --ink: #0a0a0a;
+  --ink2: #3d3d3d;
+  --ink3: #6b6b6b;
+  --ink4: #767676;
+  --ink5: #d4d4d4;
+  --bg: #ffffff;
+  --bg-s: #fafaf9;
+  --bg-m: #f4f3f1;
+  --bd: #ebeae8;
+  --bd-m: #d8d7d4;
+  --f: 'Inter', sans-serif;
+  --fd: 'Oswald', sans-serif;
+  --fm: 'JetBrains Mono', monospace;
+}
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f); font-size: 15px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  display: flex; flex-direction: column; min-height: 100%;
+}
+a { color: var(--red); text-decoration: none; }
+a:hover { color: var(--red-d); }
+
+/* Top bar — matches legal.html / insights for a cohesive look */
+.topbar {
+  height: 64px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--bd);
+  display: flex; align-items: center;
+  padding: 0 32px;
+  flex-shrink: 0;
+}
+.brand {
+  font-family: var(--fd);
+  font-size: 19px; font-weight: 600; letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+}
+.brand:hover { color: var(--ink); }
+.brand .dot { color: var(--red); font-weight: 700; }
+.brand .tld { color: var(--ink3); font-weight: 500; }
+
+/* Main centred content */
+main {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 64px 24px;
+  position: relative; overflow: hidden;
+}
+/* Subtle grid backdrop, same motif as the homepage hero */
+main::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--bd) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bd) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse 55% 55% at 50% 45%, black 10%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 50% 45%, black 10%, transparent 80%);
+  opacity: .5; pointer-events: none;
+}
+.e-inner { position: relative; z-index: 1; max-width: 540px; }
+
+.e-code {
+  font-family: var(--fd);
+  font-weight: 700;
+  font-size: clamp(86px, 18vw, 150px);
+  line-height: .95;
+  letter-spacing: -.03em;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.e-tag {
+  display: inline-block;
+  font-family: var(--fm);
+  font-size: 11.5px; font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--red-d);
+  background: var(--red-s);
+  border: 1px solid var(--red-b);
+  border-radius: 100px;
+  padding: 5px 13px;
+  margin-bottom: 22px;
+}
+.e-title {
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.e-sub {
+  font-size: 15.5px;
+  color: var(--ink3);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.e-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 48px; padding: 0 26px;
+  background: var(--red); color: #fff;
+  border-radius: 8px;
+  font-family: var(--f); font-size: 14.5px; font-weight: 500;
+  box-shadow: 0 1px 2px rgba(215,32,39,.2);
+  transition: background .15s, box-shadow .15s, transform .15s;
+}
+.e-btn:hover {
+  background: var(--red-d); color: #fff;
+  box-shadow: 0 4px 12px rgba(215,32,39,.3);
+  transform: translateY(-1px);
+}
+
+.e-links {
+  margin-top: 26px;
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 13px;
+}
+.e-links a { color: var(--ink3); font-weight: 500; }
+.e-links a:hover { color: var(--red); }
+.e-links .sep { color: var(--ink5); }
+
+/* Footer — matches legal.html / insights */
+footer.foot {
+  background: var(--bg-s);
+  border-top: 1px solid var(--bd);
+  padding: 24px 32px;
+  font-size: 12px; color: var(--ink4);
+  text-align: center;
+  flex-shrink: 0;
+}
+footer.foot a { color: var(--ink4); }
+footer.foot a:hover { color: var(--red); }
+
+/* Keyboard accessibility */
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (max-width: 560px) {
+  .topbar { padding: 0 18px; }
+  main { padding: 48px 20px; }
+  footer.foot { padding: 22px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand" aria-label="RankMyHotel home">RANKMYHOTEL<span class="dot">.</span><span class="tld">NET</span></a>
+</header>
+
+<main>
+  <div class="e-inner">
+    <div class="e-code">404</div>
+    <div class="e-tag">PAGE NOT FOUND</div>
+    <h1 class="e-title">This page checked out.</h1>
+    <p class="e-sub">The link may be broken, or the page may have moved. The Texas hotel revenue data you're after is still right where you left it.</p>
+    <a href="index.html" class="e-btn">
+      Back to homepage
+      <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <nav class="e-links" aria-label="Helpful links">
+      <a href="index.html#pricing">Pricing</a>
+      <span class="sep" aria-hidden="true">·</span>
+      <a href="insights-bryant-blvd.html">Insights</a>
+      <span class="sep" aria-hidden="true">·</span>
+      <a href="legal.html">Legal</a>
+      <span class="sep" aria-hidden="true">·</span>
+      <a href="legal.html#contact">Contact</a>
+    </nav>
+  </div>
+</main>
+
+<footer class="foot">
+  &copy; 2026 RankMyHotel.net &middot; <a href="index.html">Home</a> &middot; <a href="legal.html#privacy">Privacy</a> &middot; <a href="legal.html#terms">Terms</a> &middot; <a href="legal.html#contact">Contact</a>
+</footer>
+
+</body>
+</html>
