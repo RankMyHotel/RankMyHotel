@@ -1,0 +1,10 @@
+# robots.txt — RankMyHotel.net
+# Public marketing pages are crawlable. dashboard.html, legal.html and
+# 404.html carry their own <meta name="robots" content="noindex"> tag —
+# they are intentionally NOT disallowed here, because Google must be able
+# to crawl a page in order to see and honour its noindex directive.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://rankmyhotel.net/sitemap.xml
